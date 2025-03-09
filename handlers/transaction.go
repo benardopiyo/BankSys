@@ -37,7 +37,7 @@ func Deposit(w http.ResponseWriter, r *http.Request) {
 
 	amount, err := strconv.Atoi(r.FormValue("amount"))
 	if err != nil || amount <= 0 {
-		ErrorPage(w, r, http.StatusBadRequest, "Invalid deposit amount")
+		ErrorPageTrans(w, r, http.StatusBadRequest, "Invalid deposit amount")
 		return
 	}
 
@@ -67,31 +67,31 @@ func Withdraw(w http.ResponseWriter, r *http.Request) {
 
 	amount, err := strconv.Atoi(r.FormValue("amount"))
 	if err != nil || amount <= 0 {
-		ErrorPage(w, r, http.StatusBadRequest, "Invalid withdrawal amount")
+		ErrorPageTrans(w, r, http.StatusBadRequest, "Invalid withdrawal amount")
 		return
 	}
 
 	balance, err := getBalance(userID)
 	if err != nil {
-		ErrorPage(w, r, http.StatusInternalServerError, "Database error")
+		ErrorPageTrans(w, r, http.StatusInternalServerError, "Database error")
 		return
 	}
 
 	if balance < amount {
-		ErrorPage(w, r, http.StatusBadRequest, "Insufficient funds")
+		ErrorPageTrans(w, r, http.StatusBadRequest, "Insufficient funds")
 		return
 	}
 
 	stmt, err := config.DB.Prepare("INSERT INTO transactions (user_id, type, amount) VALUES (?, 'withdraw', ?)")
 	if err != nil {
-		ErrorPage(w, r, http.StatusInternalServerError, "Database error")
+		ErrorPageTrans(w, r, http.StatusInternalServerError, "Database error")
 		return
 	}
 	defer stmt.Close()
 
 	_, err = stmt.Exec(userID, amount)
 	if err != nil {
-		ErrorPage(w, r, http.StatusInternalServerError, "Failed to withdraw")
+		ErrorPageTrans(w, r, http.StatusInternalServerError, "Failed to withdraw")
 		return
 	}
 
@@ -102,7 +102,7 @@ func Withdraw(w http.ResponseWriter, r *http.Request) {
 func Balance(w http.ResponseWriter, r *http.Request) {
 	userID, err := getUserIDFromSession(r)
 	if err != nil || userID == "" {
-		ErrorPage(w, r, http.StatusUnauthorized, "User not authenticated")
+		ErrorPageTrans(w, r, http.StatusUnauthorized, "User not authenticated")
 		return
 	}
 

@@ -35,19 +35,19 @@ func ApplyLoan(w http.ResponseWriter, r *http.Request) {
 
 	amount, err := strconv.Atoi(r.FormValue("amount"))
 	if err != nil || amount <= 0 {
-		ErrorPage(w, r, http.StatusBadRequest, "Invalid loan amount")
+		ErrorPageTrans(w, r, http.StatusBadRequest, "Invalid loan amount")
 		return
 	}
 
 	interestRate, err := strconv.ParseFloat(r.FormValue("interest_rate"), 64)
 	if err != nil || interestRate < 0 {
-		ErrorPage(w, r, http.StatusBadRequest, "Invalid interest rate")
+		ErrorPageTrans(w, r, http.StatusBadRequest, "Invalid interest rate")
 		return
 	}
 
 	repaymentPeriod, err := strconv.Atoi(r.FormValue("repayment_period"))
 	if err != nil || repaymentPeriod <= 0 {
-		ErrorPage(w, r, http.StatusBadRequest, "Invalid repayment period")
+		ErrorPageTrans(w, r, http.StatusBadRequest, "Invalid repayment period")
 		return
 	}
 
