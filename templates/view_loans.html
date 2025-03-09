@@ -5,38 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insight</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<header>Bank Sys</header>
+<body class="bg-gray-900 text-gray-200 min-h-screen flex justify-center items-center">
 
-<div class="container">
-    <body>
-        <h2>My Loan Requests</h2>
-        <table border="1">
-            <tr>
-                <th>Loan ID</th>
-                <th>Amount</th>
-                <th>Interest Rate</th>
-                <th>Repayment Period (months)</th>
-                <th>Status</th>
-                <th>Created At</th>
+<header class="mb-6">
+    <div class="text-center">
+        <h1 class="text-4xl font-bold">Bank Sys</h1>
+    </div>
+</header>
+
+<div class="container max-w-4xl mx-auto p-8 bg-gray-800 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold mb-6 text-center">My Loan Requests</h2>
+    <table class="min-w-full bg-gray-700 text-gray-200 rounded-lg overflow-hidden">
+        <thead>
+            <tr class="bg-gray-800">
+                <th class="py-2 px-4">Loan ID</th>
+                <th class="py-2 px-4">Amount</th>
+                <th class="py-2 px-4">Interest Rate</th>
+                <th class="py-2 px-4">Repayment Period (months)</th>
+                <th class="py-2 px-4">Status</th>
+                <th class="py-2 px-4">Created At</th>
             </tr>
+        </thead>
+        <tbody>
             {{range .}}
-            <tr>
-                <td>{{.LoanID}}</td>
-                <td>{{.Amount}}</td>
-                <td>{{.InterestRate}}%</td>
-                <td>{{.RepaymentPeriod}}</td>
-                <td>{{.Status}}</td>
-                <td>{{.CreatedAt}}</td>
+            <tr class="border-b border-gray-600">
+                <td class="py-2 px-4 text-center">{{.LoanID}}</td>
+                <td class="py-2 px-4 text-center">{{.Amount}}</td>
+                <td class="py-2 px-4 text-center">{{.InterestRate}}%</td>
+                <td class="py-2 px-4 text-center">{{.RepaymentPeriod}}</td>
+                <td class="py-2 px-4 text-center">{{.Status}}</td>
+                <td class="py-2 px-4 text-center">{{.CreatedAt}}</td>
             </tr>
             {{end}}
-        </table>
-        <a href="/dashboard">Back to Dashboard</a>
-    </body>
+        </tbody>
+    </table>
+    <a href="/dashboard" class="block mt-4 text-center text-green-500 hover:text-green-400 transition-colors">Back to Dashboard</a>
 </div>
 
-<footer>© 2025 <a href="https://github.com/benardopiyo/Bank-Management-System">iLabs</a> | All Rights Reserved</footer>
+<footer class="text-gray-200 text-center mt-12"> 2025 <a href="https://github.com/benardopiyo/Bank-Management-System" class="text-gray-200 hover:text-gray-100 transition-colors">iLabs</a> | All Rights Reserved</footer>
+
+</body>
 
 </html>
