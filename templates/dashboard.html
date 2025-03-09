@@ -4,12 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insight</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark: #0A0F15;
+            --color-accent: #00C897;
+            --color-light: #E5E5E5;
+        }
+        body {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--color-dark);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        form {
+            margin-bottom: 1.5rem;
+        }
+        input[type="number"] {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: none;
+            margin-right: 0.5rem;
+        }
+        button, .btn {
+            background-color: var(--color-accent);
+            color: var(--color-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover, .btn:hover {
+            background-color: var(--color-accent-light);
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+        }
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 
 <header>Bank Sys</header>
-<a href="/logout">Logout</a>
+<a href="/logout" class="btn">Logout</a>
 
 <div class="container">
     <h2>Insight Bank</h2>
@@ -29,11 +93,9 @@
     <a href="/loan" class="btn">Request Loan</a>
     <a href="/view-loans" class="btn">View Loans</a>
 
-
-    <!-- <button onclick="checkBalance()">Check Balance</button> -->
 </div>
 
-<footer>© 2025 <a href="https://github.com/benardopiyo/Bank-Management-System">iLabs</a> | All Rights Reserved</footer>
+<footer> 2025 <a href="https://github.com/benardopiyo/Bank-Management-System">iLabs</a> | All Rights Reserved</footer>
 
 <script>
     function checkBalance() {
