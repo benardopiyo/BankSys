@@ -23,7 +23,7 @@ func Routes() *mux.Router {
 	mux.HandleFunc("/withdraw", handlers.Withdraw).Methods("POST")
 	mux.HandleFunc("/balance", handlers.Balance).Methods("GET")
 
-	// Loan-related routes - FIXED
+	// Loan-related routes
 	mux.HandleFunc("/loan", handlers.LoanPage).Methods("GET")
 	mux.HandleFunc("/apply-loan", handlers.ApplyLoan).Methods("POST")
 	mux.HandleFunc("/view-loans", handlers.ViewLoans).Methods("GET")

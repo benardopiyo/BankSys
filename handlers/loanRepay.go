@@ -15,13 +15,13 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
 
 	userID, err := getUserIDFromSession(r)
 	if err != nil || userID == "" {
-		http.Error(w, "User not authenticated", http.StatusUnauthorized)
+		ErrorPage(w, r, http.StatusUnauthorized, "You must be logged in to repay a loan")
 		return
 	}
 
 	repaymentAmount, err := strconv.Atoi(r.FormValue("amount"))
 	if err != nil || repaymentAmount <= 0 {
-		http.Error(w, "Invalid repayment amount", http.StatusBadRequest)
+		ErrorPage(w, r, http.StatusBadRequest, "Invalid repayment amount")
 		return
 	}
 
@@ -29,7 +29,7 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
 	var depositBalance int
 	err = config.DB.QueryRow("SELECT COALESCE(SUM(amount), 0) FROM transactions WHERE user_id=? AND type='deposit'", userID).Scan(&depositBalance)
 	if err != nil {
-		http.Error(w, "Failed to fetch balance", http.StatusInternalServerError)
+		ErrorPage(w, r, http.StatusInternalServerError, "Failed to fetch balance")
 		return
 	}
 
@@ -37,18 +37,18 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
 	var loanBalance int
 	err = config.DB.QueryRow("SELECT COALESCE(SUM(amount), 0) FROM loans WHERE user_id=? AND status='pending'", userID).Scan(&loanBalance)
 	if err != nil {
-		http.Error(w, "Failed to fetch loan balance", http.StatusInternalServerError)
+		ErrorPage(w, r, http.StatusInternalServerError, "Failed to fetch loan balance")
 		return
 	}
 
 	if loanBalance <= 0 {
-		http.Error(w, "No outstanding loan balance", http.StatusBadRequest)
+		ErrorPage(w, r, http.StatusBadRequest, "No outstanding loan balance")
 		return
 	}
 
 	tx, err := config.DB.Begin()
 	if err != nil {
-		http.Error(w, "Transaction error", http.StatusInternalServerError)
+		ErrorPage(w, r, http.StatusInternalServerError, "Failed to start transaction")
 		return
 	}
 
@@ -57,7 +57,7 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
 		_, err = tx.Exec("INSERT INTO transactions (user_id, type, amount) VALUES (?, 'repayment', ?)", userID, -repaymentAmount)
 		if err != nil {
 			tx.Rollback()
-			http.Error(w, "Failed to process repayment", http.StatusInternalServerError)
+			ErrorPage(w, r, http.StatusInternalServerError, "Failed to process repayment")
 			return
 		}
 
@@ -65,11 +65,11 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
 		_, err = tx.Exec("UPDATE transactions SET amount = amount - ? WHERE user_id=? AND type='deposit'", repaymentAmount, userID)
 		if err != nil {
 			tx.Rollback()
-			http.Error(w, "Failed to update deposit balance", http.StatusInternalServerError)
+			ErrorPage(w, r, http.StatusInternalServerError, "Failed to update deposit balance")
 			return
 		}
 	} else {
-		http.Error(w, "Insufficient deposit balance", http.StatusBadRequest)
+		ErrorPage(w, r, http.StatusBadRequest, "Insufficient deposit balance")
 		tx.Rollback()
 		return
 	}
@@ -78,7 +78,7 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
 	_, err = tx.Exec("UPDATE loans SET amount = amount - ? WHERE user_id=? AND status='pending'", repaymentAmount, userID)
 	if err != nil {
 		tx.Rollback()
-		http.Error(w, "Failed to update loan balance", http.StatusInternalServerError)
+		ErrorPage(w, r, http.StatusInternalServerError, "Failed to update loan balance")
 		return
 	}
 
@@ -152,26 +152,26 @@ func ProcessDeposit(w http.ResponseWriter, r *http.Request) {
 
 	userID, err := getUserIDFromSession(r)
 	if err != nil || userID == "" {
-		http.Error(w, "User not authenticated", http.StatusUnauthorized)
+		ErrorPage(w, r, http.StatusUnauthorized, "User not authenticated")
 		return
 	}
 
 	depositAmount, err := strconv.Atoi(r.FormValue("amount"))
 	if err != nil || depositAmount <= 0 {
-		http.Error(w, "Invalid deposit amount", http.StatusBadRequest)
+		ErrorPage(w, r, http.StatusBadRequest, "Invalid deposit amount")
 		return
 	}
 
 	_, err = config.DB.Exec("INSERT INTO transactions (user_id, type, amount) VALUES (?, 'deposit', ?)", userID, depositAmount)
 	if err != nil {
-		http.Error(w, "Failed to process deposit", http.StatusInternalServerError)
+		ErrorPage(w, r, http.StatusInternalServerError, "Failed to process deposit")
 		return
 	}
 
 	// Check if auto-deduction is needed
 	err = AutoDeductLoan(userID)
 	if err != nil {
-		http.Error(w, "Auto deduction failed", http.StatusInternalServerError)
+		ErrorPage(w, r, http.StatusInternalServerError, "Auto deduction failed")
 		return
 	}
 
