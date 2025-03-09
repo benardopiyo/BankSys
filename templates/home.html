@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insight</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-
-<body>
-    <header>Bank Sys</header>
-    <div class="container">
-        <h2>Insight Bank</h2>
-        <a href="/register">Register</a>
-        <a href="/login">Login</a>
-    </div>
-    <footer>© 2025 <a href="https://github.com/benardopiyo/Bank-Management-System">iLabs</a> | All Rights Reserved
-    </footer>
+<body class="bg-gray-100">
+    <nav class="bg-green-600 p-4 flex justify-between items-center">
+        <div class="text-white text-lg font-bold">BrandName</div>
+        <div>
+            <a href="#" class="text-white mr-4">Login</a>
+            <a href="#" class="text-white">Register</a>
+        </div>
+    </nav>
+    <main class="flex flex-col items-center justify-center h-screen">
+        <h1 class="text-4xl font-bold text-green-700 mb-4">Enhance Your Financial Experience</h1>
+        <p class="text-center mb-6">Moving money should never take more than a few taps. Transfers are always free between friends.</p>
+        <button class="bg-green-500 text-white px-6 py-2 rounded-full">Send Money Now</button>
+    </main>
 </body>
-
 </html>
