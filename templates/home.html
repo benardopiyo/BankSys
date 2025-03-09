@@ -3,24 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
+    <title>DigiBank - Smart Banking Solutions</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark: #0A0F15;
+            --color-accent: #00C897;
+            --color-light: #E5E5E5;
+        }
+        body {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+        }
+        .bg-dark { background-color: var(--color-dark); }
+        .bg-accent { background-color: var(--color-accent); }
+        .text-accent { color: var(--color-accent); }
+        .hover-accent:hover { color: var(--color-accent); }
+        .card-shadow {
+            box-shadow: 0 8px 32px rgba(0, 200, 151, 0.1);
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <nav class="bg-green-600 p-4 flex justify-between items-center">
-        <div class="text-white text-lg font-bold">BrandName</div>
-        <div class="space-x-4">
-            <a href="#home" class="text-white hover:text-green-200">Home</a>
-            <a href="#about" class="text-white hover:text-green-200">About</a>
-            <a href="#contact" class="text-white hover:text-green-200">Contact</a>
-            <a href="/templates/login.html" class="bg-white text-green-600 px-4 py-2 rounded hover:bg-green-200">Login</a>
-            <a href="/templates/register.html" class="bg-white text-green-600 px-4 py-2 rounded hover:bg-green-200">Register</a>
+<body class="bg-dark min-h-screen">
+    <nav class="bg-dark/50 backdrop-blur-sm fixed w-full top-0 z-50 px-16 py-4">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center">
+                <svg class="w-8 h-8 text-accent mr-2" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span class="text-light text-xl font-bold">DigiBank</span>
+            </div>
+            <div class="space-x-8">
+                <a href="#home" class="text-light hover:text-accent transition-colors">Home</a>
+                <a href="#product" class="text-light hover:text-accent transition-colors">Product</a>
+                <a href="#service" class="text-light hover:text-accent transition-colors">Service</a>
+                <a href="#about" class="text-light hover:text-accent transition-colors">About</a>
+                <a href="#features" class="text-light hover:text-accent transition-colors">Features</a>
+                <a href="#register" class="bg-accent text-dark px-6 py-2 rounded-full hover:bg-opacity-90 transition-colors">Register</a>
+            </div>
         </div>
     </nav>
-    <main class="flex flex-col items-center justify-center h-screen">
-        <h1 class="text-4xl font-bold text-green-700 mb-4">Enhance Your Financial Experience</h1>
-        <p class="text-center mb-6">Moving money should never take more than a few taps. Transfers are always free between friends.</p>
-        <button class="bg-green-500 text-white px-6 py-2 rounded-full">Send Money Now</button>
+
+    <main class="pt-32 px-16">
+        <div class="grid grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <h1 class="text-6xl font-bold leading-tight">
+                    Smart Banking to<br>
+                    Manage your Money<br>
+                    & Transactions
+                </h1>
+                <p class="text-light/80 text-lg">
+                    We will help manage your money and transactions easily,<br>
+                    anywhere and anytime without having to leave the house.
+                </p>
+                <div class="flex space-x-4">
+                    <button class="bg-accent text-dark px-8 py-3 rounded-full hover:bg-opacity-90 transition-colors">
+                        Get Started
+                    </button>
+                    <button class="border border-accent text-accent px-8 py-3 rounded-full hover:bg-accent hover:text-dark transition-colors">
+                        Learn More
+                    </button>
+                </div>
+                <div class="grid grid-cols-3 gap-8 pt-8">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-accent">2300+</div>
+                        <div class="text-light/60">User Active</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-accent">150+</div>
+                        <div class="text-light/60">Trusted Company</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-accent">$280M+</div>
+                        <div class="text-light/60">Transactions</div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="relative z-10">
+                    <img src="https://placehold.co/600x400/00C897/ffffff" alt="Banking App Interface" class="rounded-lg shadow-2xl">
+                </div>
+                <div class="absolute inset-0 bg-accent/20 blur-3xl -z-10"></div>
+            </div>
+        </div>
+
+        <section class="py-24">
+            <h2 class="text-3xl font-bold text-center mb-16">We provide the best service for you</h2>
+            <div class="grid grid-cols-3 gap-8">
+                <div class="bg-dark/50 backdrop-blur-sm p-8 rounded-xl card-shadow">
+                    <div class="bg-accent/10 w-12 h-12 flex items-center justify-center rounded-lg mb-4">
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Keeping Secrecy</h3>
+                    <p class="text-light/60">Your banking data is encrypted and stored securely in our system.</p>
+                </div>
+                <div class="bg-dark/50 backdrop-blur-sm p-8 rounded-xl card-shadow">
+                    <div class="bg-accent/10 w-12 h-12 flex items-center justify-center rounded-lg mb-4">
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 10h18M7 15h1m4 0h1m4 0h1M3 6h18"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Free Transaction</h3>
+                    <p class="text-light/60">Enjoy free transactions between DigiBank users worldwide.</p>
+                </div>
+                <div class="bg-dark/50 backdrop-blur-sm p-8 rounded-xl card-shadow">
+                    <div class="bg-accent/10 w-12 h-12 flex items-center justify-center rounded-lg mb-4">
+                        <svg class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Security First</h3>
+                    <p class="text-light/60">Advanced security measures to protect your financial data.</p>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>
