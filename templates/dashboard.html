@@ -4,36 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insight</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-900 text-gray-200 min-h-screen flex justify-center items-center">
 
-<header>Bank Sys</header>
-<a href="/logout">Logout</a>
+<nav class="bg-gray-800 fixed w-full top-0 z-50 px-16 py-4 shadow-lg">
+    <div class="flex justify-between items-center">
+        <div>
+            <button onclick="window.history.back()" class="bg-green-500 text-gray-900 px-4 py-2 rounded hover:bg-green-400 transition-colors ml-16">Go Back</button>
+        </div>
+        <div class="flex items-center">
+            <span class="text-xl font-bold">Bank Sys</span>
+        </div>
+        <div>
+            <a href="/" class="bg-green-500 text-gray-900 px-6 py-2 rounded-full hover:bg-green-400 transition-colors">Logout</a>
+        </div>
+    </div>
+</nav>
 
-<div class="container">
-    <h2>Insight Bank</h2>
+<div class="container max-w-2xl mx-auto mt-24 p-8 bg-gray-800 rounded-lg shadow-lg transform translate-x-10">
+    <h2 class="text-3xl font-bold mb-4">Insight Bank</h2>
 
-    <h3>Current Balance: <span id="balance">Loading...</span></h3>
+    <h3 class="text-xl mb-4">Current Balance: <span id="balance">Loading...</span></h3>
 
-    <form action="/deposit" method="post">
-        <input type="number" name="amount" placeholder="Deposit Amount" required>
-        <button type="submit">Deposit</button>
+    <form action="/deposit" method="post" class="mb-4">
+        <input type="number" name="amount" placeholder="Deposit Amount" required class="px-4 py-2 rounded bg-gray-700 border-none mr-2">
+        <button type="submit" class="bg-green-500 text-gray-900 px-4 py-2 rounded hover:bg-green-400 transition-colors">Deposit</button>
     </form>
 
-    <form action="/withdraw" method="post">
-        <input type="number" name="amount" placeholder="Withdraw Amount" required>
-        <button type="submit">Withdraw</button>
+    <form action="/withdraw" method="post" class="mb-4">
+        <input type="number" name="amount" placeholder="Withdraw Amount" required class="px-4 py-2 rounded bg-gray-700 border-none mr-2">
+        <button type="submit" class="bg-green-500 text-gray-900 px-4 py-2 rounded hover:bg-green-400 transition-colors">Withdraw</button>
     </form>
 
-    <a href="/loan" class="btn">Request Loan</a>
-    <a href="/view-loans" class="btn">View Loans</a>
+    <a href="/loan" class="bg-green-500 text-gray-900 px-4 py-2 rounded hover:bg-green-400 transition-colors inline-block mb-2">Request Loan</a>
+    <a href="/view-loans" class="bg-green-500 text-gray-900 px-4 py-2 rounded hover:bg-green-400 transition-colors inline-block">View Loans</a>
 
-
-    <!-- <button onclick="checkBalance()">Check Balance</button> -->
 </div>
 
-<footer>© 2025 <a href="https://github.com/benardopiyo/Bank-Management-System">iLabs</a> | All Rights Reserved</footer>
+<footer class="text-gray-200 text-center mt-6 fixed bottom-0 left-0 w-full bg-gray-900"> 2025 <a href="https://github.com/benardopiyo/Bank-Management-System" class="text-gray-200 hover:text-gray-100 transition-colors">iLabs</a> | All Rights Reserved</footer>
 
 <script>
     function checkBalance() {
